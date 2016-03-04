@@ -21,10 +21,16 @@ namespace russische_bauernmultiplikation
 			Assert.That (h, Is.EqualTo (new[]{9, 4, 2, 1}));
 		}
 
+		[Test]
+		public void Test_Verdoppeln() {
+			var v = Verdoppeln (3, 4);
+			Assert.That (v, Is.EqualTo (new[]{3, 6, 12, 24}));
+		}
+
 
 		int Mult(int a, int b) {
-			var h = Halbieren (a);
-			var v = Verdoppeln (b);
+			var h = Halbieren (a).ToArray();
+			var v = Verdoppeln (b, h.Length);
 			var indizes = Gerade_Zahlen_finden (h);
 			v = Streichen (v, indizes);
 			return v.Sum ();
@@ -38,8 +44,12 @@ namespace russische_bauernmultiplikation
 			}
 		}
 
-		IEnumerable<int> Verdoppeln(int i) {
-			return null;	
+		IEnumerable<int> Verdoppeln(int i, int n) {
+			while (n > 0) {
+				yield return i;
+				i *= 2;
+				n--;
+			}
 		}
 
 		IEnumerable<int> Gerade_Zahlen_finden(IEnumerable<int> zahlen) {
