@@ -18,7 +18,12 @@ namespace fizzbuzz
 
 		IEnumerable<string> FizzBuzz(int start, int ende) {
 			for (var i = start; i <= ende; i++)
-				yield return i.ToString ();
+				yield return FizzBuzz (i);
+		}
+
+
+		string FizzBuzz(int i) {
+			return i.ToString ();
 		}
 	}
 }
