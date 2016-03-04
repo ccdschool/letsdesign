@@ -9,7 +9,8 @@ namespace hello_world
 		[Test ()]
 		public void TestCase ()
 		{
-			Assert.IsTrue (true);
+			var result = "Hello, World!";
+			Assert.AreEqual ("Hello, World!", result);
 		}
 	}
 }
