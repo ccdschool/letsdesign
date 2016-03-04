@@ -11,8 +11,9 @@ namespace fizzbuzz
 		[Test ()]
 		public void TestCase ()
 		{
-			var resultate = FizzBuzz (1, 5);
-			Assert.That (resultate, Is.EqualTo (new[]{"1", "2", "Fizz", "4", "Buzz"}));
+			var resultate = FizzBuzz (1, 15);
+			Assert.That (resultate, Is.EqualTo (new[]{"1", "2", "Fizz", "4", "Buzz", "Fizz", "7", "8", "Fizz", "Buzz",
+													  "11", "Fizz", "13", "14", "FizzBuzz"}));
 		}
 
 
@@ -35,6 +36,7 @@ namespace fizzbuzz
 		}
 
 		Klassen Klassifizieren(int i) {
+			if (i % 3 == 0 && i % 5 == 0) return Klassen.FizzBuzz;
 			if (i % 3 == 0)	return Klassen.Fizz;
 			if (i % 5 == 0)	return Klassen.Buzz;
 			return Klassen.Zahl;
@@ -46,6 +48,8 @@ namespace fizzbuzz
 				return "Fizz";
 			case Klassen.Buzz:
 				return "Buzz";
+			case Klassen.FizzBuzz:
+				return "FizzBuzz";
 			default:
 				return i.ToString ();
 			}
