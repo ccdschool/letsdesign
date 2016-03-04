@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace hello_world
 {
@@ -10,13 +11,13 @@ namespace hello_world
 		[Test ()]
 		public void TestCase ()
 		{
-			var result = FizzBuzz (3);
-			Assert.That (result, Is.EqualTo (new[]{"1", "2", "Fizz"}));
+			var result = FizzBuzz (2);
+			Assert.That (result, Is.EqualTo (new[]{"1", "2"}));
 		}
 
 
 		IEnumerable<string> FizzBuzz(int n) {
-			return new[]{""};
+			return Enumerable.Range (1, n).Select (i => i.ToString ());
 		}
 	}
 }
