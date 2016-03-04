@@ -1,2 +1,2 @@
-# letsdesign
-Let's design - Beim Softwareentwurf über die Schulter geschaut
+# Let's Design
+Entwürf und Code der gleichnamigen Videoserie bei Youtube.
