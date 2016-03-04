@@ -11,13 +11,16 @@ namespace hello_world
 		[Test ()]
 		public void TestCase ()
 		{
-			var result = FizzBuzz (2);
-			Assert.That (result, Is.EqualTo (new[]{"1", "2"}));
+			var result = FizzBuzz (3);
+			Assert.That (result, Is.EqualTo (new[]{"1", "2", "Fizz"}));
 		}
 
 
 		IEnumerable<string> FizzBuzz(int n) {
-			return Enumerable.Range (1, n).Select (i => i.ToString ());
+			return Enumerable.Range (1, n).Select (i => {
+				if (i % 3 == 0) return "Fizz";
+				return i.ToString();
+			});
 		}
 	}
 }
