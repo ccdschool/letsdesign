@@ -28,6 +28,7 @@ namespace fizzbuzz
 			return Übersetzen (klasse, i);
 		}
 
+
 		enum Klassen {
 			Zahl,
 			Fizz,
@@ -36,11 +37,15 @@ namespace fizzbuzz
 		}
 
 		Klassen Klassifizieren(int i) {
-			if (i % 3 == 0 && i % 5 == 0) return Klassen.FizzBuzz;
-			if (i % 3 == 0)	return Klassen.Fizz;
-			if (i % 5 == 0)	return Klassen.Buzz;
+			if (IsFizz(i) && IsBuzz(i)) return Klassen.FizzBuzz;
+			if (IsFizz(i))	return Klassen.Fizz;
+			if (IsBuzz(i))	return Klassen.Buzz;
 			return Klassen.Zahl;
 		}
+
+		static bool IsFizz (int i) => i % 3 == 0;
+		static bool IsBuzz (int i) => i % 5 == 0;
+
 
 		string Übersetzen(Klassen klasse, int i) {
 			switch (klasse) {
