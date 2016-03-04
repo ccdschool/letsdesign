@@ -19,12 +19,15 @@ namespace hello_world
 
 		IEnumerable<string> FizzBuzz(int n) {
 			return Enumerable.Range (1, n).Select (i => {
-				if (i % 3 == 0 && i % 5 == 0) return "FizzBuzz";
-				if (i % 3 == 0) return "Fizz";
-				if (i % 5 == 0) return "Buzz";
+				if (IsFizz(i) && IsBuzz(i)) return "FizzBuzz";
+				if (IsFizz (i))	return "Fizz";
+				if (IsBuzz(i)) return "Buzz";
 				return i.ToString();
 			});
 		}
+
+		static bool IsFizz (int i) => i % 3 == 0;
+		static bool IsBuzz(int i) => i % 5 == 0;
 	}
 }
 
