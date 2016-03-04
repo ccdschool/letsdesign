@@ -23,6 +23,22 @@ namespace fizzbuzz
 
 
 		string FizzBuzz(int i) {
+			var klasse = Klassifizieren (i);
+			return Übersetzen (klasse, i);
+		}
+
+		enum Klassen {
+			Zahl,
+			Fizz,
+			Buzz,
+			FizzBuzz
+		}
+
+		Klassen Klassifizieren(int i) {
+			return Klassen.Zahl;
+		}
+
+		string Übersetzen(Klassen klasse, int i) {
 			return i.ToString ();
 		}
 	}
