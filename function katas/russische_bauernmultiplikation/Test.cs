@@ -9,6 +9,7 @@ namespace russische_bauernmultiplikation
 	public class Test
 	{
 		[TestCase (2, 3, 6)]
+		[TestCase (47, 42, 1974)]
 		public void TestMult (int a, int b, int erwartet)
 		{
 			var resultat = RussischeBauernmultiplikation.Mult (a, b);
@@ -36,7 +37,8 @@ namespace russische_bauernmultiplikation
 
 		[Test]
 		public void Test_Streichen() {
-		
+			var zahlen = RussischeBauernmultiplikation.Streichen (new[]{ 1, 2, 3, 4, 5 }, new[]{ 1, 3 });
+			Assert.That (zahlen, Is.EqualTo (new[]{1,3,5}));
 		}
 	}
 
@@ -76,7 +78,7 @@ namespace russische_bauernmultiplikation
 		}
 
 		public static IEnumerable<int> Streichen(IEnumerable<int> zahlen, IEnumerable<int> indizes) {
-			return null;
+			return zahlen.Where ((_, i) => !indizes.Contains (i));
 		}
 	}
 }
