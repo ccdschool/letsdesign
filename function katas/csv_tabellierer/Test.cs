@@ -80,6 +80,18 @@ namespace csv_tabellierer
 				"aa|b |ccc|"
 			}));
 		}
+
+		[Test]
+		public void Test_Spaltenbreiten_bestimmen() {
+			var sut = new Tabellierer ();
+
+			var spaltenbreiten = sut.Spaltenbreiten_bestimmen (new[]{ 
+				new Datensatz{Werte = new[]{"H", "H2", "H33"}},
+				new Datensatz{Werte = new[]{"aa", "b", "ccc"}}
+			});
+
+			Assert.That (spaltenbreiten, Is.EqualTo (new[]{2, 2, 3}));
+		}
 	}
 
 
@@ -93,7 +105,11 @@ namespace csv_tabellierer
 
 
 		public int[] Spaltenbreiten_bestimmen(IEnumerable<Datensatz> datensätze) {
-			throw new NotImplementedException ();
+			var spaltenbreiten = new int[datensätze.First().Werte.Length];
+			for (var iSpalte = 0; iSpalte < spaltenbreiten.Length; iSpalte++) {
+				spaltenbreiten[iSpalte] = datensätze.Select (ds => ds.Werte [iSpalte].Length).Max ();
+			}
+			return spaltenbreiten;
 		}
 
 		public IEnumerable<string> Tabellenzeilen_bauen(IEnumerable<Datensatz> datensätze, int[] spaltenbreiten) {
