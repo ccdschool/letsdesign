@@ -40,6 +40,8 @@
     <Compile Include="Test.cs" />
     <Compile Include="CSVParser.cs" />
     <Compile Include="CSVTabellierer.cs" />
+    <Compile Include="Tabellierer.cs" />
+    <Compile Include="Datensatz.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
