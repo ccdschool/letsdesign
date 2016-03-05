@@ -54,6 +54,15 @@ namespace csv_tabellierer
 				"1", "-", "a", "b"
 			}));
 		}
+
+		[Test]
+		public void Test_Unterstreichung_bauen() {
+			var sut = new Tabellierer ();
+
+			var unterstreichung = sut.Unterstreichung_bauen (new[]{ 1, 2, 3 });
+
+			Assert.AreEqual ("-+--+---+", unterstreichung);
+		}
 	}
 
 
@@ -66,16 +75,17 @@ namespace csv_tabellierer
 		}
 
 
-		int[] Spaltenbreiten_bestimmen(IEnumerable<Datensatz> datensätze) {
+		public int[] Spaltenbreiten_bestimmen(IEnumerable<Datensatz> datensätze) {
 			throw new NotImplementedException ();
 		}
 
-		IEnumerable<string> Tabellenzeilen_bauen(IEnumerable<Datensatz> datensätze, int[] spaltenbreiten) {
+		public IEnumerable<string> Tabellenzeilen_bauen(IEnumerable<Datensatz> datensätze, int[] spaltenbreiten) {
 			throw new NotImplementedException ();
 		}
 
-		string Unterstreichung_bauen(int[] spaltenbreiten) {
-			throw new NotImplementedException ();
+		public string Unterstreichung_bauen(int[] spaltenbreiten) {
+			var spaltenUnterstriche = spaltenbreiten.Select (sb => "".PadLeft(sb, '-')); // "-", "--", "---"
+			return string.Join("+", spaltenUnterstriche) + "+";
 		}
 
 		public IEnumerable<string> Unterstreichung_einfügen(IEnumerable<string> tabellenzeilen, string unterstreichung) {
