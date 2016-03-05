@@ -41,24 +41,49 @@ namespace csv_tabellierer
 				new Datensatz{Werte = new[]{"x", "yz", "123"}}
 			}, true);
 		}
-	}
 
 
-	class CSVTabellierer {
-		public IEnumerable<string> Tabellieren(IEnumerable<string> csvzeilen) {
-			var parser = new CSVParser ();
-			var tab = new Tabellierer ();
 
-			var datensätze = parser.Parsen (csvzeilen);
-			return tab.Formatieren (datensätze);
+		[Test]
+		public void Test_Untersteichung_einfügen() {
+			var sut = new Tabellierer ();
+
+			var tabellenzeilen = sut.Unterstreichung_einfügen (new[]{"1","a","b"}, "-");
+
+			Assert.That (tabellenzeilen, Is.EqualTo(new[]{ 
+				"1", "-", "a", "b"
+			}));
 		}
 	}
 
 
 	class Tabellierer {
 		public IEnumerable<string> Formatieren(IEnumerable<Datensatz> datensätze) {
+			var spaltenbreiten = Spaltenbreiten_bestimmen (datensätze);
+			var tabellenzeilen = Tabellenzeilen_bauen (datensätze, spaltenbreiten);
+			var unterstreichung = Unterstreichung_bauen (spaltenbreiten);
+			return Unterstreichung_einfügen (tabellenzeilen, unterstreichung);
+		}
+
+
+		int[] Spaltenbreiten_bestimmen(IEnumerable<Datensatz> datensätze) {
 			throw new NotImplementedException ();
 		}
+
+		IEnumerable<string> Tabellenzeilen_bauen(IEnumerable<Datensatz> datensätze, int[] spaltenbreiten) {
+			throw new NotImplementedException ();
+		}
+
+		string Unterstreichung_bauen(int[] spaltenbreiten) {
+			throw new NotImplementedException ();
+		}
+
+		public IEnumerable<string> Unterstreichung_einfügen(IEnumerable<string> tabellenzeilen, string unterstreichung) {
+			var tabListe = tabellenzeilen.ToList ();
+			tabListe.Insert (1, unterstreichung);
+			return tabListe;
+		}
+
 	}
 
 
