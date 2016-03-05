@@ -63,6 +63,23 @@ namespace csv_tabellierer
 
 			Assert.AreEqual ("-+--+---+", unterstreichung);
 		}
+
+		[Test]
+		public void Test_Tabellenzeilen_bauen() {
+			var sut = new Tabellierer ();
+
+			var tabellenzeilen = sut.Tabellenzeilen_bauen (new[]{ 
+				new Datensatz{Werte = new[]{"H", "H2", "H33"}},
+				new Datensatz{Werte = new[]{"aa", "b", "ccc"}}
+			}, new[]{ 
+				2, 2, 3
+			});
+
+			Assert.That (tabellenzeilen, Is.EqualTo(new[]{
+				"H |H2|H33|",
+				"aa|b |ccc|"
+			}));
+		}
 	}
 
 
@@ -80,7 +97,10 @@ namespace csv_tabellierer
 		}
 
 		public IEnumerable<string> Tabellenzeilen_bauen(IEnumerable<Datensatz> datensätze, int[] spaltenbreiten) {
-			throw new NotImplementedException ();
+			return datensätze.Select (ds => {
+				var werteAufgefüllt = ds.Werte.Select((w,i) => w.PadRight(spaltenbreiten[i]));
+				return string.Join("|", werteAufgefüllt) + "|";
+			});
 		}
 
 		public string Unterstreichung_bauen(int[] spaltenbreiten) {
