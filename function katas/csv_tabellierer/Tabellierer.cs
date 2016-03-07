@@ -14,6 +14,7 @@ namespace csv_tabellierer
 			return Unterstreichung_einfügen (tabellenzeilen, unterstreichung);
 		}
 
+
 		int[] Spaltenbreiten_bestimmen(IEnumerable<Datensatz> datensätze) {
 			var spaltenbreiten = new int[datensätze.First().Werte.Length];
 			for (var iSpalte = 0; iSpalte < spaltenbreiten.Length; iSpalte++) {
