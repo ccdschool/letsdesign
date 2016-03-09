@@ -6,7 +6,7 @@ using System.Linq;
 namespace csv_tabellierer
 {
 
-	class CSVTabellierer {
+	public class CSVTabellierer {
 		public IEnumerable<string> Tabellieren(IEnumerable<string> csvzeilen) {
 			var parser = new CSVParser ();
 			var tab = new Tabellierer ();
