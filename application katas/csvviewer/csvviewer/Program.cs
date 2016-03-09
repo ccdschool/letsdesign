@@ -17,6 +17,7 @@ namespace csvviewer
 		}
 	}
 
+
 	class App {
 		ConsolePortal con;
 
@@ -46,32 +47,15 @@ namespace csvviewer
 	}
 
 
-	class DateiProvider {
-		public IEnumerable<string> Datei_laden(string dateiname) {
-			return new[]{ 
-				dateiname + ";a;b",
-				"x;y;z",
-				"1;2;3"
-			};
-		}
-	}
 	class Blättern {
+		const int SEITENLÄNGE = 10;
+
 		public CsvSeite Erste_Seite_ermitteln(IEnumerable<string> csvzeilen) {
 			return new CsvSeite{ 
 				Überschriftenzeile = csvzeilen.First(),
-				Datenzeilen = csvzeilen.Skip(1)
+				Datenzeilen = csvzeilen.Skip(1).Take(SEITENLÄNGE)
 			};
 		}
 	}
 
-	class CsvSeite {
-		public string Überschriftenzeile;
-		public IEnumerable<string> Datenzeilen;
-
-		public IEnumerable<string> Zeilen {
-			get { 
-				return new[]{ Überschriftenzeile }.Concat (Datenzeilen);
-			}
-		}
-	}
 }

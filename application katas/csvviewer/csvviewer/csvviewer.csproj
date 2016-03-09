@@ -40,6 +40,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConsolePortal.cs" />
     <Compile Include="CliPortal.cs" />
+    <Compile Include="DateiProvider.cs" />
+    <Compile Include="CsvSeite.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
