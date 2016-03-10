@@ -24,7 +24,13 @@ namespace csvviewer
 
 		public App(ConsolePortal con) {
 			this.con = con;
+
+			this.con.ErsteSeiteCmd += () => {
+				var tabellenzeilen = Erste_Seite_aufblättern ();
+				con.Tabelle_anzeigen (tabellenzeilen);
+			};
 		}
+
 
 		public void Run(string[] args) {
 			var cli = new CliPortal ();
@@ -35,7 +41,7 @@ namespace csvviewer
 			this.cache = new CsvCache (csvzeilen);
 
 			var tabellenzeilen = Erste_Seite_aufblättern ();
-			con.Tabelle_anzeigen (tabellenzeilen);
+			con.Öffnen (tabellenzeilen);
 		}
 
 
