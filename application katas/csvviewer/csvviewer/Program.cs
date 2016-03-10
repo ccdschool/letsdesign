@@ -20,6 +20,7 @@ namespace csvviewer
 
 	class App {
 		ConsolePortal con;
+		CsvCache cache;
 
 		public App(ConsolePortal con) {
 			this.con = con;
@@ -27,35 +28,24 @@ namespace csvviewer
 
 		public void Run(string[] args) {
 			var cli = new CliPortal ();
+			var dat = new DateiProvider ();
 
 			var dateiname = cli.Starten (args);
-			var tabellenzeilen = Erste_Seite_aufblättern (dateiname);
+			var csvzeilen = dat.Datei_laden (dateiname);
+			this.cache = new CsvCache (csvzeilen);
+
+			var tabellenzeilen = Erste_Seite_aufblättern ();
 			con.Tabelle_anzeigen (tabellenzeilen);
 		}
 
 
-		IEnumerable<string> Erste_Seite_aufblättern(string dateiname) {
-			var dat = new DateiProvider ();
+		IEnumerable<string> Erste_Seite_aufblättern() {
 			var blättern = new Blättern ();
 			var csvtab = new csv_tabellierer.CSVTabellierer ();
 
-			var csvzeilen = dat.Datei_laden (dateiname);
-			var csvseite = blättern.Erste_Seite_ermitteln (csvzeilen);
+			var csvseite = blättern.Erste_Seite_ermitteln (this.cache);
 			return csvtab.Tabellieren (csvseite.Zeilen);
 		}
 
 	}
-
-
-	class Blättern {
-		const int SEITENLÄNGE = 10;
-
-		public CsvSeite Erste_Seite_ermitteln(IEnumerable<string> csvzeilen) {
-			return new CsvSeite{ 
-				Überschriftenzeile = csvzeilen.First(),
-				Datenzeilen = csvzeilen.Skip(1).Take(SEITENLÄNGE)
-			};
-		}
-	}
-
 }

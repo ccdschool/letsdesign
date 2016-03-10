@@ -42,6 +42,8 @@
     <Compile Include="CliPortal.cs" />
     <Compile Include="DateiProvider.cs" />
     <Compile Include="CsvSeite.cs" />
+    <Compile Include="Blättern.cs" />
+    <Compile Include="CsvCache.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
