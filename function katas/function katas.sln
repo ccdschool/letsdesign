@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fizzbuzz", "fizzbuzz\fizzbuzz.csproj", "{1C82D92B-DA67-4C59-9D76-E1523DA7B40D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "russische_bauernmultiplikation", "russische_bauernmultiplikation\russische_bauernmultiplikation.csproj", "{E616FF8D-FCC6-4F1C-8ADD-148531AE7E9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csv_tabellierer", "csv_tabellierer\csv_tabellierer.csproj", "{D2D14008-CEFA-4745-B601-0ECD588B7CE8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C82D92B-DA67-4C59-9D76-E1523DA7B40D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C82D92B-DA67-4C59-9D76-E1523DA7B40D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C82D92B-DA67-4C59-9D76-E1523DA7B40D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C82D92B-DA67-4C59-9D76-E1523DA7B40D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2D14008-CEFA-4745-B601-0ECD588B7CE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2D14008-CEFA-4745-B601-0ECD588B7CE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2D14008-CEFA-4745-B601-0ECD588B7CE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2D14008-CEFA-4745-B601-0ECD588B7CE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E616FF8D-FCC6-4F1C-8ADD-148531AE7E9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E616FF8D-FCC6-4F1C-8ADD-148531AE7E9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E616FF8D-FCC6-4F1C-8ADD-148531AE7E9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E616FF8D-FCC6-4F1C-8ADD-148531AE7E9D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
