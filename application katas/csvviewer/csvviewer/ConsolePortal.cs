@@ -33,6 +33,9 @@ namespace csvviewer
 				case 'l':
 					LetzteSeiteCmd ();
 					break;
+				case 'n':
+					NächsteSeiteCmd ();
+					break;
 				}
 			}
 		}
@@ -40,5 +43,6 @@ namespace csvviewer
 
 		public event Action ErsteSeiteCmd;
 		public event Action LetzteSeiteCmd;
+		public event Action NächsteSeiteCmd;
 	}
 }
