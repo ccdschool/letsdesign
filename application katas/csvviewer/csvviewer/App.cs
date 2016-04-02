@@ -9,13 +9,26 @@ namespace csvviewer
 	class App {
 		Blättern blättern;
 		csv_tabellierer.CSVTabellierer csvtab;
+		CliPortal cli;
 		ConsolePortal con;
 		CsvCache cache;
 
-		public App(ConsolePortal con) {
+		public App(CliPortal cli, ConsolePortal con) {
+			this.cli = cli;
+			this.con = con;
+
+			var dat = new DateiProvider ();
 			this.blättern = new Blättern ();
 			this.csvtab = new csv_tabellierer.CSVTabellierer ();
-			this.con = con;
+
+
+			this.cli.BeiDateiname += dateiname => {
+				var csvzeilen = dat.Datei_laden (dateiname);
+				this.cache = new CsvCache (csvzeilen);
+
+				var tabellenzeilen = Erste_Seite_aufblättern (this.cache);
+				con.Öffnen (tabellenzeilen);	
+			};
 
 			this.con.ErsteSeiteCmd += () => {
 				var tabellenzeilen = Erste_Seite_aufblättern (this.cache);
@@ -28,15 +41,7 @@ namespace csvviewer
 		}
 
 		public void Run(string[] args) {
-			var cli = new CliPortal ();
-			var dat = new DateiProvider ();
-
-			var dateiname = cli.Starten (args);
-			var csvzeilen = dat.Datei_laden (dateiname);
-			this.cache = new CsvCache (csvzeilen);
-
-			var tabellenzeilen = Erste_Seite_aufblättern (this.cache);
-			con.Öffnen (tabellenzeilen);
+			this.cli.Starten (args);
 		}
 
 

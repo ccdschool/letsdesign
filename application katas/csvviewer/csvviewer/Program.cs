@@ -10,8 +10,9 @@ namespace csvviewer
 	{
 		public static void Main (string[] args)
 		{
+			var cli = new CliPortal ();
 			var con = new ConsolePortal ();
-			var app = new App (con);
+			var app = new App (cli, con);
 
 			app.Run (args);
 		}
