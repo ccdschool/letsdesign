@@ -9,37 +9,58 @@ namespace csvviewer
 	class Blättern {
 		const int SEITENLÄNGE = 10;
 		int seitenindex = 0;
+		CsvCache cache;
+
+		public Blättern(CsvCache cache) {
+			this.cache = cache;
+		}
 
 
-		public CsvSeite Erste_Seite_ermitteln(CsvCache cache) {
+		public CsvSeite Erste_Seite_ermitteln() {
 			this.seitenindex = 0;
-			return Seite_laden (cache, 0);
+			return Seite_laden (0);
 		}
 
-		public CsvSeite Letzte_Seite_ermitteln(CsvCache cache) {
-			this.seitenindex = cache.AnzahlDatenzeilen / SEITENLÄNGE;
 
-			var überspringen = cache.AnzahlDatenzeilen / SEITENLÄNGE * SEITENLÄNGE;
-			if (cache.AnzahlDatenzeilen <= SEITENLÄNGE)	überspringen = 0;
+		public CsvSeite Letzte_Seite_ermitteln() {
+			this.seitenindex = this.cache.AnzahlDatenzeilen / SEITENLÄNGE;
 
-			return Seite_laden (cache, überspringen);
+			var überspringen = this.cache.AnzahlDatenzeilen / SEITENLÄNGE * SEITENLÄNGE;
+			if (this.cache.AnzahlDatenzeilen <= SEITENLÄNGE)	überspringen = 0;
+
+			return Seite_laden (überspringen);
 		}
 
-		public CsvSeite Nächste_Seite_ermitteln(CsvCache cache) {
+
+		public CsvSeite Nächste_Seite_ermitteln() {
 			this.seitenindex += 1;
 
-			if (this.seitenindex * SEITENLÄNGE >= cache.AnzahlDatenzeilen)
-				return Letzte_Seite_ermitteln (cache);
+			if (this.seitenindex * SEITENLÄNGE >= this.cache.AnzahlDatenzeilen)
+				return Letzte_Seite_ermitteln ();
 
 			var überspringen = this.seitenindex * SEITENLÄNGE;
-			return Seite_laden (cache, überspringen);
+			return Seite_laden (überspringen);
 		}
 
 
-		private CsvSeite Seite_laden(CsvCache cache, int überspringen) {
+		public CsvSeite Vorherige_Seite_ermitteln() {
+			this.seitenindex -= 1;
+			if (this.seitenindex < 0)
+				return Erste_Seite_ermitteln ();
+
+			if (this.seitenindex * SEITENLÄNGE >= this.cache.AnzahlDatenzeilen)
+				return Letzte_Seite_ermitteln ();
+
+			var überspringen = this.seitenindex * SEITENLÄNGE;
+
+			return Seite_laden (überspringen);
+		}
+
+
+		private CsvSeite Seite_laden(int überspringen) {
 			return new CsvSeite{ 
-				Überschriftenzeile = cache.Überschriftenzeile,
-				Datenzeilen = cache.Datenzeilen.Skip(überspringen).Take(SEITENLÄNGE)
+				Überschriftenzeile = this.cache.Überschriftenzeile,
+				Datenzeilen = this.cache.Datenzeilen.Skip(überspringen).Take(SEITENLÄNGE)
 			};
 		}
 	}
