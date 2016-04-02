@@ -21,6 +21,10 @@ namespace csvviewer
 				var tabellenzeilen = Erste_Seite_aufblättern (this.cache);
 				con.Tabelle_anzeigen (tabellenzeilen);
 			};
+			this.con.LetzteSeiteCmd += () =>  {
+				var letzteTabellenzeilen = Letzte_Seite_aufblättern (this.cache);
+				con.Tabelle_anzeigen (letzteTabellenzeilen);	
+			};
 		}
 
 		public void Run(string[] args) {
@@ -32,11 +36,7 @@ namespace csvviewer
 			this.cache = new CsvCache (csvzeilen);
 
 			var tabellenzeilen = Erste_Seite_aufblättern (this.cache);
-			con.Öffnen (tabellenzeilen,
-				() => {
-					var letzteTabellenzeilen = Letzte_Seite_aufblättern (this.cache);
-					con.Tabelle_anzeigen (letzteTabellenzeilen);	
-				});
+			con.Öffnen (tabellenzeilen);
 		}
 
 

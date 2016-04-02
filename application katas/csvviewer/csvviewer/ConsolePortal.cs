@@ -7,9 +7,9 @@ namespace csvviewer
 	// Beispieldatenquelle: https://www.destatis.de/DE/ZahlenFakten/LaenderRegionen/Regionales/Gemeindeverzeichnis/Administrativ/AdministrativeUebersicht.html
 
 	class ConsolePortal {
-		public void Öffnen(IEnumerable<string> tabellenzeilen, Action beiLetzteSeiteCmd) {
+		public void Öffnen(IEnumerable<string> tabellenzeilen) {
 			Tabelle_anzeigen (tabellenzeilen);
-			Menü_anzeigen (beiLetzteSeiteCmd);
+			Menü_anzeigen ();
 		}
 			
 		public void Tabelle_anzeigen(IEnumerable<string> tabellenzeilen) {
@@ -18,7 +18,7 @@ namespace csvviewer
 		}
 
 
-		void Menü_anzeigen(Action beiLetzteSeiteCmd) {
+		void Menü_anzeigen() {
 			while (true) {
 				Console.Write ("Blättern zu E(rste, L(etzte, N(ächste, V(orherige Seite, eX(it: ");
 				var cmd = Console.ReadKey ().KeyChar;
@@ -31,7 +31,7 @@ namespace csvviewer
 					ErsteSeiteCmd ();
 					break;
 				case 'l':
-					beiLetzteSeiteCmd ();
+					LetzteSeiteCmd ();
 					break;
 				}
 			}
@@ -39,5 +39,6 @@ namespace csvviewer
 
 
 		public event Action ErsteSeiteCmd;
+		public event Action LetzteSeiteCmd;
 	}
 }
