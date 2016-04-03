@@ -6,7 +6,12 @@ namespace csvviewer
 {
 	// Beispieldatenquelle: https://www.destatis.de/DE/ZahlenFakten/LaenderRegionen/Regionales/Gemeindeverzeichnis/Administrativ/AdministrativeUebersicht.html
 
-	class CliPortal {
+	public interface ICliPortal {
+		void Starten (string[] args);
+		event Action<string, int> BeiKommandozeilenparameter;
+	}
+
+	class CliPortal : ICliPortal {
 		const int STANDARDSEITENLÄNGE = 10;
 
 		public void Starten(string[] args) {

@@ -6,7 +6,18 @@ namespace csvviewer
 {
 	// Beispieldatenquelle: https://www.destatis.de/DE/ZahlenFakten/LaenderRegionen/Regionales/Gemeindeverzeichnis/Administrativ/AdministrativeUebersicht.html
 
-	class ConsolePortal {
+	public interface IConsolePortal {
+		void Tabelle_anzeigen (IEnumerable<string> tabellenzeilen);
+		void Menü_anzeigen();
+
+		event Action ErsteSeiteCmd;
+		event Action LetzteSeiteCmd;
+		event Action NächsteSeiteCmd;
+		event Action VorherigeSeiteCmd;
+	}
+
+
+	class ConsolePortal : IConsolePortal {
 		public void Tabelle_anzeigen(IEnumerable<string> tabellenzeilen) {
 			foreach (var tz in tabellenzeilen)
 				Console.WriteLine (tz);

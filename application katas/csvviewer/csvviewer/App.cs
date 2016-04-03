@@ -6,12 +6,13 @@ namespace csvviewer
 {
 	// Beispieldatenquelle: https://www.destatis.de/DE/ZahlenFakten/LaenderRegionen/Regionales/Gemeindeverzeichnis/Administrativ/AdministrativeUebersicht.html
 
-	class App {
+	public class App {
 		Interaktionen interaktionen;
-		CliPortal cli;
-		ConsolePortal con;
+		ICliPortal cli;
+		IConsolePortal con;
 
-		public App(CliPortal cli, ConsolePortal con) {
+
+		public App(ICliPortal cli, IConsolePortal con) {
 			this.cli = cli;
 			this.con = con;
 			var dat = new DateiProvider ();
