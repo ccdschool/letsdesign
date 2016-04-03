@@ -19,13 +19,16 @@ Video: https://www.youtube.com/watch?v=qTeS1WiGHvY
 
 Video: https://www.youtube.com/watch?v=4qSpRgth2MI
 
----
-Geplant:
-
-Inkrement 4
+## Inkrement 4
 * Flow-Design und Implementation, um Seitenlänge auf der Kommandozeile zu übergeben; betrifft 1. Interaktion
 * Refactoring: Interaktionen in eigene Klasse herausziehen
 * Klassendiagramm
+
+Video: https://youtu.be/ic_DVQ97hLU
+
+---
+
+Geplant:
 
 Inkrement 5
 * `App{}` testbar machen
