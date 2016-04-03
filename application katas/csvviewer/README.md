@@ -25,6 +25,7 @@ Geplant:
 Inkrement 4
 * Flow-Design und Implementation, um Seitenlänge auf der Kommandozeile zu übergeben; betrifft 1. Interaktion
 * Refactoring: Interaktionen in eigene Klasse herausziehen
+* Klassendiagramm
 
 Inkrement 5
 * `App{}` testbar machen
