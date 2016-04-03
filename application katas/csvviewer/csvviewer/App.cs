@@ -7,45 +7,35 @@ namespace csvviewer
 	// Beispieldatenquelle: https://www.destatis.de/DE/ZahlenFakten/LaenderRegionen/Regionales/Gemeindeverzeichnis/Administrativ/AdministrativeUebersicht.html
 
 	class App {
-		Blättern blättern;
-		csv_tabellierer.CSVTabellierer csvtab;
+		Interaktionen interaktionen;
 		CliPortal cli;
 		ConsolePortal con;
 
 		public App(CliPortal cli, ConsolePortal con) {
 			this.cli = cli;
 			this.con = con;
+			this.interaktionen = new Interaktionen();
 
 			var dat = new DateiProvider ();
 
-			this.csvtab = new csv_tabellierer.CSVTabellierer ();
-
-
 			this.cli.BeiKommandozeilenparameter += (dateiname, seitenlänge) => {
 				var csvzeilen = dat.Datei_laden (dateiname);
+
 				var cache = new CsvCache (csvzeilen);
-				this.blättern = new Blättern (cache, seitenlänge);
+				interaktionen.Blättern = new Blättern(cache, seitenlänge);
 
-				var tabellenzeilen = Erste_Seite_aufblättern ();
-				con.Öffnen (tabellenzeilen);	
+				this.interaktionen.Erste_Seite_aufblättern ();
+				con.Menü_anzeigen ();	
 			};
 
-			this.con.ErsteSeiteCmd += () => {
-				var tabellenzeilen = Erste_Seite_aufblättern ();
-				con.Tabelle_anzeigen (tabellenzeilen);
-			};
-			this.con.LetzteSeiteCmd += () =>  {
-				var letzteTabellenzeilen = Letzte_Seite_aufblättern ();
-				con.Tabelle_anzeigen (letzteTabellenzeilen);	
-			};
-			this.con.NächsteSeiteCmd += () => {
-				var letzteTabellenzeilen = Nächste_Seite_aufblättern ();
-				con.Tabelle_anzeigen (letzteTabellenzeilen);	
-			};
-			this.con.VorherigeSeiteCmd += () => {
-				var letzteTabellenzeilen = Vorherige_Seite_aufblättern ();
-				con.Tabelle_anzeigen (letzteTabellenzeilen);	
-			};
+
+			this.con.ErsteSeiteCmd += this.interaktionen.Erste_Seite_aufblättern;
+			this.con.LetzteSeiteCmd += this.interaktionen.Letzte_Seite_aufblättern;
+			this.con.NächsteSeiteCmd += this.interaktionen.Nächste_Seite_aufblättern;
+			this.con.VorherigeSeiteCmd += this.interaktionen.Vorherige_Seite_aufblättern;
+
+
+			this.interaktionen.BeiTabelle += con.Tabelle_anzeigen;
 		}
 
 		public void Run(string[] args) {
@@ -53,24 +43,39 @@ namespace csvviewer
 		}
 
 
-		IEnumerable<string> Erste_Seite_aufblättern() {
-			var csvseite = blättern.Erste_Seite_ermitteln ();
-			return csvtab.Tabellieren (csvseite.Zeilen);
-		}
 
-		IEnumerable<string> Letzte_Seite_aufblättern() {
-			var csvseite = blättern.Letzte_Seite_ermitteln ();
-			return csvtab.Tabellieren (csvseite.Zeilen);
-		}
+		class Interaktionen {
+			csv_tabellierer.CSVTabellierer csvtab;
 
-		IEnumerable<string> Nächste_Seite_aufblättern() {
-			var csvseite = blättern.Nächste_Seite_ermitteln ();
-			return csvtab.Tabellieren (csvseite.Zeilen);
-		}
+			public Interaktionen() {
+				this.csvtab = new csv_tabellierer.CSVTabellierer();
+			}
 
-		IEnumerable<string> Vorherige_Seite_aufblättern() {
-			var csvseite = blättern.Vorherige_Seite_ermitteln ();
-			return csvtab.Tabellieren (csvseite.Zeilen);
+			public Blättern Blättern { private get; set; }
+
+
+			public void Erste_Seite_aufblättern() {
+				var csvseite = this.Blättern.Erste_Seite_ermitteln ();
+				BeiTabelle (csvtab.Tabellieren (csvseite.Zeilen));
+			}
+
+			public void Letzte_Seite_aufblättern() {
+				var csvseite = this.Blättern.Letzte_Seite_ermitteln ();
+				BeiTabelle (csvtab.Tabellieren (csvseite.Zeilen));
+			}
+
+			public void Nächste_Seite_aufblättern() {
+				var csvseite = this.Blättern.Nächste_Seite_ermitteln ();
+				BeiTabelle (csvtab.Tabellieren (csvseite.Zeilen));
+			}
+
+			public void Vorherige_Seite_aufblättern() {
+				var csvseite = this.Blättern.Vorherige_Seite_ermitteln ();
+				BeiTabelle (csvtab.Tabellieren (csvseite.Zeilen));
+			}
+
+
+			public event Action<IEnumerable<string>> BeiTabelle;
 		}
 	}
 }
