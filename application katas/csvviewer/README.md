@@ -26,14 +26,12 @@ Video: https://www.youtube.com/watch?v=4qSpRgth2MI
 
 Video: https://youtu.be/ic_DVQ97hLU
 
----
-
-Geplant:
-
-Inkrement 5
+## Inkrement 5
 * Refaktorisieren: Interaktionen über ctor mit Abhängigkeiten versorgen
 * `App{}` testbar machen
   * Interfaces für Portale einführen
   * Testprojekt anlegen
   * Mocks für Portale implementieren
   * Akzeptanztest aufsetzen, der durch eine Testdatei blättert
+
+Video: https://youtu.be/2jFj04C0ufY
