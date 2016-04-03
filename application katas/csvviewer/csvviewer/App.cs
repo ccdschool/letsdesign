@@ -21,10 +21,10 @@ namespace csvviewer
 			this.csvtab = new csv_tabellierer.CSVTabellierer ();
 
 
-			this.cli.BeiDateiname += dateiname => {
+			this.cli.BeiKommandozeilenparameter += (dateiname, seitenlänge) => {
 				var csvzeilen = dat.Datei_laden (dateiname);
 				var cache = new CsvCache (csvzeilen);
-				this.blättern = new Blättern (cache);
+				this.blättern = new Blättern (cache, seitenlänge);
 
 				var tabellenzeilen = Erste_Seite_aufblättern ();
 				con.Öffnen (tabellenzeilen);	
