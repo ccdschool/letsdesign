@@ -31,6 +31,7 @@ Video: https://youtu.be/ic_DVQ97hLU
 Geplant:
 
 Inkrement 5
+* Refaktorisieren: Interaktionen über ctor mit Abhängigkeiten versorgen
 * `App{}` testbar machen
   * Interfaces für Portale einführen
   * Testprojekt anlegen
